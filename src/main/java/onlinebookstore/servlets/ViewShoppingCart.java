@@ -13,11 +13,7 @@ import java.util.ArrayList;
 
 public class ViewShoppingCart extends HttpServlet {
 
-    static BookStoreManager manager;
-
-    static {
-        manager = new BookStoreManager();
-    }
+    static BookStoreManager manager = BookStoreManager.getInstance();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,6 +28,7 @@ public class ViewShoppingCart extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            System.out.println("ShoppingCartView" + request.getSession().getAttribute("user"));
 
 
             //update session variable

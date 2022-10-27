@@ -13,11 +13,7 @@ import java.util.Date;
 
 public class UpdateProfile extends HttpServlet {
 
-    static BookStoreManager manager;
-
-    static {
-        manager = new BookStoreManager();
-    }
+    static BookStoreManager manager = BookStoreManager.getInstance();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -124,6 +120,7 @@ public class UpdateProfile extends HttpServlet {
             out.println("window.location = 'myaccount.jsp';");
             out.println("</script>");
         } catch (Exception e) {
+            e.printStackTrace();
             //if error occurs, display error details
             response.sendError(response.SC_INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
         } finally {

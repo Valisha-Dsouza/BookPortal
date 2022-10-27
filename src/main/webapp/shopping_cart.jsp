@@ -2,13 +2,14 @@
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <script type="text/javascript">
     $(document).ready(function(){
         //update buttons
         $("button").button().click(function(){
             var dom = $("input#" + $(this).attr("id"));
-            
+
             if($(this).attr("class").indexOf("decrease") > -1){
                 if(dom.val() > 1){
                     dom.val(dom.val() - 1);
@@ -17,7 +18,7 @@
                 dom.val(parseInt(dom.val()) + 1);
             }
         });
-        
+
         $("#update").click(function(){
             var update = "";
 
@@ -52,6 +53,7 @@
     <%-- loop through each order line in the cart to add item to cart table --%>
     <c:forEach var="line" items="${cart}" varStatus="status">
         <input type="hidden" class="info" value="${line.bookId}" id="a${status.index}" />
+        ${line.unitPrice}
         <tr>
             <td>${cart_books[status.index].title}</td>
             <td><fmt:formatNumber value="${line.unitPrice}" type="currency" currencyCode="USD" currencySymbol="$" minFractionDigits="1" maxFractionDigits="2" /></td>

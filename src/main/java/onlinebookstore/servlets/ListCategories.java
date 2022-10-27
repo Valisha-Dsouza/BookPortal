@@ -41,6 +41,7 @@ public class ListCategories extends HttpServlet {
             //forward request to list_categories page
             request.getRequestDispatcher("list_categories.jsp").forward(request, response);
         } catch (Exception e) {
+            e.printStackTrace();
             //if error occurs, display error details
             response.sendError(response.SC_INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
         } finally {

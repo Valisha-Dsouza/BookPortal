@@ -12,11 +12,7 @@ import java.io.PrintWriter;
 
 public class SearchBooks extends HttpServlet {
 
-    static BookStoreManager manager;
-
-    static {
-        manager = new BookStoreManager();
-    }
+    static BookStoreManager manager = BookStoreManager.getInstance();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

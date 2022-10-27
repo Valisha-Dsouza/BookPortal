@@ -11,11 +11,7 @@ import java.io.PrintWriter;
 
 public class UpdateCart extends HttpServlet {
 
-    static BookStoreManager manager;
-
-    static {
-        manager = new BookStoreManager();
-    }
+    static BookStoreManager manager = BookStoreManager.getInstance();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,6 +26,7 @@ public class UpdateCart extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            System.out.println("UpdateCart" + request.getSession().getAttribute("user"));
             //get parameter
             String update = request.getParameter("update");
 
@@ -54,7 +51,7 @@ public class UpdateCart extends HttpServlet {
                     manager.removeFromCart(fields[i]);
                 } else {
                     //else, mofidy quantity value
-                    manager.modifyCart(new Long(fields[i]), new Long(fields[i + 1]));
+                    manager.modifyCart(fields[i], new Long(fields[i + 1]));
                 }
 
             }
@@ -70,6 +67,7 @@ public class UpdateCart extends HttpServlet {
             out.println("</script>");
 
         } catch (Exception e) {
+            e.printStackTrace();
             //if error occurs, display error details
             response.sendError(response.SC_INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
         } finally {

@@ -14,11 +14,9 @@ import java.io.PrintWriter;
 
 public class AddComment extends HttpServlet {
 
-    static BookStoreManager manager;
+    static BookStoreManager manager = BookStoreManager.getInstance();
 
-    static {
-        manager = new BookStoreManager();
-    }
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -89,6 +87,7 @@ public class AddComment extends HttpServlet {
             out.println("window.location = 'details.jsp?id=" + bookIdParam + "';");
             out.println("</script>");
         } catch (Exception e) {
+            e.printStackTrace();
             //if error occurs, display error details
             response.sendError(response.SC_INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
         } finally {

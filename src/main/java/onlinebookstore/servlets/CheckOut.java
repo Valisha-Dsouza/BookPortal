@@ -12,11 +12,7 @@ import java.util.ArrayList;
 
 public class CheckOut extends HttpServlet {
 
-    static BookStoreManager manager;
-
-    static {
-        manager = new BookStoreManager();
-    }
+    static BookStoreManager manager = BookStoreManager.getInstance();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -64,6 +60,7 @@ public class CheckOut extends HttpServlet {
 
 
             //get address parameter
+            System.out.println("Checkout" + request.getSession().getAttribute("user"));
             String address = request.getParameter("address");
 
             //attempt to checkout
@@ -83,6 +80,7 @@ public class CheckOut extends HttpServlet {
             out.println("</script>");
 
         } catch (Exception e) {
+            e.printStackTrace();
             //if error occurs, display error details
             response.sendError(response.SC_INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
         } finally {

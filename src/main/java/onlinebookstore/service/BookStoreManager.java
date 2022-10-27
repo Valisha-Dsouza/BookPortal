@@ -23,6 +23,16 @@ public class BookStoreManager {
     //declare current user
     private UserDTO user = null;
 
+    static BookStoreManager bookStoreManager = null;
+
+    public synchronized static BookStoreManager getInstance() {
+        if (null == bookStoreManager) {
+            bookStoreManager = new BookStoreManager();
+        }
+
+        return bookStoreManager;
+    }
+
 
     //register new user
 
@@ -285,9 +295,8 @@ public class BookStoreManager {
     }
 
     //modify cart item
-    public void modifyCart(Long bookId, Long quantity) throws Exception {
+    public void modifyCart(String bookId, Long quantity) throws Exception {
         Iterator iterator = cart.iterator();
-
 
         while (iterator.hasNext()) {
             OrderLineDTO orderLineDTO = (OrderLineDTO) iterator.next();
@@ -297,8 +306,6 @@ public class BookStoreManager {
                 return;
             }
         }
-
-        throw new Exception("There is no such cart item!");
     }
 
     //view shopping cart
@@ -341,12 +348,11 @@ public class BookStoreManager {
             return;
         }
 
+        System.out.println("Order is" + order + "User is" + user);
+        order.setUserId(user.getId());
 
         //add order to database and get returned order local object
         OrderDTO orderDTO = orderManager.create(order);
-
-        //set user for order local object
-        //  orderLocal.setUser(user);
 
         //setup iterator for cart collection
         Iterator iterator = cart.iterator();
@@ -355,16 +361,9 @@ public class BookStoreManager {
 
         //set order id and add each order line to database
         while (iterator.hasNext()) {
-            //get currently pointed order line item
             OrderLineDTO tempOrderLine = (OrderLineDTO) iterator.next();
-
-            //set order id for order line dto
-            //      tempOrderLine.setOrderId(orderLocal.getId());
-
-            //add new order line to database
+            tempOrderLine.setOrderId(orderDTO.getId());
             OrderLineDTO orderLineDTO = orderLineManager.create(tempOrderLine);
-
-            //get book local object
             BookDTO bookDTO = bookManager.findByPrimaryKey(tempOrderLine.getBookId());
 
             //set order for order line local object
