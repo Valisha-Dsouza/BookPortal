@@ -23,7 +23,7 @@
         </property>
 
         <property name="hibernate.connection.password">
-            root
+            root12345
         </property>
         <property name="hibernate.current_session_context_class">
             org.hibernate.context.ThreadLocalSessionContext
