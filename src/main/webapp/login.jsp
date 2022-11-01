@@ -80,7 +80,6 @@
                         <li><a href="category.jsp">books</a></li>
                         <li><a href="search.jsp">search</a></li>
                         <li class="selected"><a href="login.jsp">login</a></li>
-                        <li><a href="register.jsp">register</a></li>
                         <li><a href="contact.jsp">contact</a></li>
                     </ul>
                 </div>
