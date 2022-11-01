@@ -48,14 +48,14 @@
                         <li><a href="about.jsp">about us</a></li>
                         <li><a href="category.jsp">books</a></li>
                         <li><a href="search.jsp">search</a></li>
-
+                        <%-- if user logged in, show "my account"; else, show "login" and "register" menus --%>
                         <c:choose>
                             <c:when test="${not empty user}">
                                 <li><a href="myaccount.jsp">my accout</a></li>
                             </c:when>
                             <c:otherwise>
                                 <li><a href="login.jsp">login</a></li>
-
+                                <li><a href="register.jsp">register</a></li>
                             </c:otherwise>
                         </c:choose>
                         <li class="selected"><a href="contact.jsp">contact</a></li>
