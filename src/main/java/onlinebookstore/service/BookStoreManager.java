@@ -33,11 +33,15 @@ public class BookStoreManager {
         return bookStoreManager;
     }
 
+    public void logout() {
+        this.user = null;
+        System.out.println("Logout" + this.user);
+    }
 
     //register new user
 
     public void register(UserDTO user) throws Exception {
-
+        System.out.println("Register" + this.user);
         //if user already logged in, throw new error
         if (this.user != null) {
             throw new Exception("Cannot register! Only anonymous users can create new account!");

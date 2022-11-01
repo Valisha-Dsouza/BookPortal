@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%-- if cart session variable empty, initialize it --%>
 <c:if test="${empty cart}">
     <c:set var="cart" value="<%= new ArrayList()%>" scope="session" />
